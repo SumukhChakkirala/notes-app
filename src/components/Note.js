@@ -1,17 +1,26 @@
 import { MdDeleteForever } from "react-icons/md";
+import { Typography,Button, Container, makeStyles } from '@material-ui/core'
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { useStyles } from './styling';
+
+
+
 
 const Note = ({id, text, date, handleDeleteNote}) =>{
+    const classes = useStyles()
     return (
-        <div className="note">
+        <Container>
+        <div className={classes.note}>
             <span>{text}</span>
-            <div className="note-footer">
+            <div className={classes.noteFooter}>
                 <small>{date}</small>
-                <MdDeleteForever 
+                <RemoveCircleIcon 
                     onClick={() => handleDeleteNote(id)} 
-                    className="delete-icon" 
-                    size='1.3em'/>
+                    className={classes.icons}
+                    />
             </div>
         </div>
+        </Container>
     )
 }
 export default Note;

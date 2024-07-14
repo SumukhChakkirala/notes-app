@@ -1,8 +1,11 @@
 import { useState } from "react";
-
+import { useStyles } from "./styling";
+import TextField from '@mui/material/TextField';
+import { Container,Grid } from "@material-ui/core";
 const AddNote = ({handleAddNote}) => {
     const[noteText, setNoteText] = useState('');
     const charaterLimit = 200;
+    const classes = useStyles()
 
     const handleChange= (event) =>{
         if (charaterLimit-event.target.value.length>=0){
@@ -15,20 +18,28 @@ const AddNote = ({handleAddNote}) => {
             setNoteText('')
             
         }
+    
     }
-    return (<div className="note new">
-        <textarea 
-        rows="8" 
-        cols = "10" 
-        placeholder="Type to add a note..."
-        value={noteText}
-        onChange={handleChange}
-        ></textarea>
-        <div className="note-footer">
-            <small>{200- noteText.length} remaining</small>
-            <button className="save" onClick={handlesaveClick}>Save</button>
-        </div>
-    </div>
+    return (
+        //<Container>
+            <div className={classes.noteNew}>
+                <TextField
+                    id="standard-multiline-static"
+                    label="Add Note"
+                    multiline
+                    rows={4}
+                    variant="standard" // or "filled"
+                    InputProps={{
+                        disableUnderline: true,
+                        sx: { backgroundColor: 'aqua' }
+                    }}
+                />
+                <div className={classes.noteFooter}>
+                    <small>{200 - noteText.length} remaining</small>
+                    <button className={classes.save} onClick={handlesaveClick}>Save</button>
+                </div>
+            </div>
+        //</Container>
     );
 };
 

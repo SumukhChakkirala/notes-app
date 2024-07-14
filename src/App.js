@@ -3,30 +3,14 @@ import { nanoid } from 'nanoid';
 import NotesList from './components/NotesList';
 import Search from './components/Search';
 import Header from './components/Header';
-
+import { useStyles } from './components/styling';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
 const App = () => {
-	const [notes, setNotes] = useState([
-		{
-			id: nanoid(),
-			text: 'This is my first note!',
-			date: '15/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my second note!',
-			date: '21/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my third note!',
-			date: '28/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my new note!',
-			date: '30/04/2021',
-		},
-	]);
+	const [notes, setNotes] = useState([]);
+
+	const classes = useStyles()
 
 	const [searchText, setSearchText] = useState('');
 
@@ -65,21 +49,31 @@ const App = () => {
 		setNotes(newNotes);
 	};
 
-	return (
-		<div className={`${darkMode && 'dark-mode'}`}>
-			<div className='container'>
-				<Header handleToggleDarkMode={setDarkMode} />
-				<Search handleSearchNote={setSearchText} />
-				<NotesList
-					notes={notes.filter((note) =>
-						note.text.toLowerCase().includes(searchText)
-					)}
-					handleAddNote={addNote}
-					handleDeleteNote={deleteNote}
-				/>
-			</div>
-		</div>
-	);
+	const theme = createTheme({
+        palette: {
+            mode: darkMode ? 'dark' : 'light',
+            // Customize other theme options as needed
+        },
+    });
+
+    return (
+        <ThemeProvider theme={theme}>
+			<CssBaseline/>
+            <div className={`${darkMode ? classes.darkMode : ''}`}>
+                <div className={classes.container}>
+                    <Header handleToggleDarkMode={setDarkMode} />
+                    <Search handleSearchNote={setSearchText} />
+                    <NotesList
+                        notes={notes.filter((note) =>
+                            note.text.toLowerCase().includes(searchText)
+                        )}
+                        handleAddNote={addNote}
+                        handleDeleteNote={deleteNote}
+                    />
+                </div>
+            </div>
+        </ThemeProvider>
+    );
 };
 
 export default App;
