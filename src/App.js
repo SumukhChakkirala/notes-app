@@ -53,12 +53,16 @@ const App = () => {
         palette: {
             mode: darkMode ? 'dark' : 'light',
             // Customize other theme options as needed
+			text: {
+				primary: '#000000', // Set text color to black
+				secondary: '#000000', // Custom text color for secondary text if needed
+			  },
         },
     });
 
     return (
         <ThemeProvider theme={theme}>
-			<CssBaseline/>
+			<CssBaseline style={{ color: theme.palette.text.secondary }}/>
             <div className={`${darkMode ? classes.darkMode : ''}`}>
                 <div className={classes.container}>
                     <Header handleToggleDarkMode={setDarkMode} />
