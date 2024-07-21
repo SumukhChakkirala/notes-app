@@ -54,9 +54,9 @@ code {
   background-color: aqua;
 } */
 
-/* textarea:focus{
+textarea:focus{
   outline: none;
-} */
+}
 
 /* .save{
   background-color: aqua;

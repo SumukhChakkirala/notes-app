@@ -52,12 +52,16 @@ export const useStyles = makeStyles({
       flexDirection: 'column',
       justifyContent: 'space-between',
       whiteSpace:'pre-wrap',
+      '&:hover':{
+          backgroundColor: 'blue',
+        }
       },
     noteFooter:{
           display: 'flex',
           alignItems: 'centers',
           justifyContent: 'space-between',
       },
+    
     noteNew:{
         backgroundColor: 'aqua',
         borderRadius: '10px',
@@ -83,6 +87,14 @@ export const useStyles = makeStyles({
         '& h1':{
             color: 'white',
         }
-    }
+    },
+    textarea:{
+        border: 'none',
+        resize: 'none',
+        backgroundColor: 'aqua',
+        '&:focus':{
+            outline: 'none',
+        }
+      }
   })
 
