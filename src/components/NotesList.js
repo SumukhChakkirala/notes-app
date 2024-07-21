@@ -7,14 +7,14 @@ import { Box, Card } from "@mui/material";
 const NotesList = ({ notes, handleAddNote, handleDeleteNote }) => {
     const classes = useStyles()
     return(
-        <Box className={classes.noteList} >
+        <div className={classes.noteList} >
             <AddNote handleAddNote={handleAddNote}/>
             {notes.map((note)=> (<Note id={note.id} 
             text = {note.text} 
             date = {note.date}
             handleDeleteNote={handleDeleteNote}/>
             ))}
-        </Box>
+        </div>
     )
 }
 export default NotesList;
