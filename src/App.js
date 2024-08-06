@@ -113,7 +113,7 @@ const MyApp = () => {
           <NotesList
             notes={notes.filter((note) => note.text.toLowerCase().includes(searchText))}
             handleAddNote={addNote}
-            handleDeleteNote={deleteNote}
+            handleDeleteNote={deleteNote }
           />
         </div>
       </div>
