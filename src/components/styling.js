@@ -53,7 +53,7 @@ export const useStyles = makeStyles({
       justifyContent: 'space-between',
       whiteSpace:'pre-wrap',
       '&:hover':{
-          backgroundColor: 'blue',
+          backgroundColor: 'yellow',
         }
       },
     noteFooter:{
@@ -88,13 +88,19 @@ export const useStyles = makeStyles({
             color: 'white',
         }
     },
+    colorLayout:{
+      backgroundColor: 'black'
+    },
+    h1tag:{
+      color: 'black',
+    },
     textarea:{
         border: 'none',
         resize: 'none',
         backgroundColor: 'aqua',
         '&:focus':{
             outline: 'none',
-        }
-      }
+        },
+      },
   })
 

@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
+import ColorPicker from "./components/ColorPicker.js";
+import Avatar from "@material-ui/core/Avatar";
+import deepOrange from "@material-ui/core/colors/deepOrange";
+import deepPurple from "@material-ui/core/colors/deepPurple";
+import red from "@material-ui/core/colors/red";
+import green from "@material-ui/core/colors/green";
+import blue from "@material-ui/core/colors/blue";
 import NotesList from './components/NotesList';
 import Search from './components/Search';
 import Header from './components/Header';
@@ -9,16 +16,20 @@ import Box from '@mui/material/Box';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { Container, Grid } from '@material-ui/core';
-import { CssBaseline } from '@mui/material';
-
+import Fingerprint from '@mui/icons-material/Fingerprint';
+import { ButtonGroup, Button, Container, Grid, CssBaseline } from '@material-ui/core';
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 const MyApp = () => {
+  // const [color,setColor] = useState("grey")
   const [notes, setNotes] = useState([]);
   const classes = useStyles();
   const [searchText, setSearchText] = useState('');
   const [mode, setMode] = useState('dark');
+  // const click = color =>{setColor(color)}
+  // useEffect(()=>{
+  //   document.body.style.backgroundColor= color;
+  // },[color]) 
 
   useEffect(() => {
     const savedNotes = JSON.parse(localStorage.getItem('react-notes-app-data'));
@@ -50,7 +61,7 @@ const MyApp = () => {
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+        setMode((prevMode) => (prevMode === 'dark' ? 'dark' : 'light'));
       },
     }),
     []
@@ -69,41 +80,45 @@ const MyApp = () => {
       }),
     [mode]
   );
-
+  console.log(colorMode);
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline/>
-        <Grid container justifyContent="center">
-          <Box
-            sx={{
-              display: 'flex',
-              width: '100%',
-              alignItems: 'center',
-              justifyContent: 'center',
-              bgcolor: 'background.default',
-              color: 'text.primary',
-              borderRadius: 1,
-              p: 3,
-            }}
-          >
-            {theme.palette.mode} mode
-            <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-          </Box>
-          <div className={classes.container}>
-            <Header />
-            <Search handleSearchNote={setSearchText} />
-            <NotesList
-              notes={notes.filter((note) => note.text.toLowerCase().includes(searchText))}
-              handleAddNote={addNote}
-              handleDeleteNote={deleteNote}
-            />
-          </div>
+    // <ColorModeContext.Provider value={colorMode}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+        {/* <Grid container spacing={2}>
+        <ButtonGroup className={classes.h1tag} variant="outlined" aria-label="Basic button group">
+          <Button onClick={()=>{click("#ca7c67")}}>One</Button>
+          <Button onClick={()=>{click("#DFFF00")}}>Two</Button>
+          <Button onClick={()=>{click("#6495ED")}}>Three</Button>
+        </ButtonGroup>
+        <OutlinedDiv label="Color Picker">
+        <Grid container justify="center" alignItems="center">
+          <Avatar style={{ backgroundColor: deepOrange[500] }} />
+          <Avatar style={{ backgroundColor: deepPurple[500] }} />
+          <Avatar style={{ backgroundColor: red[500] }} />
+          <Avatar style={{ backgroundColor: green[500] }} />
+          <Avatar style={{ backgroundColor: blue[500] }} />
         </Grid>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+      </OutlinedDiv>
+          
+        </Grid> */}
+        <Container >
+      
+      </Container>
+        <div className={classes.container}>
+          <Header />
+
+          <Search handleSearchNote={setSearchText} />
+          <NotesList
+            notes={notes.filter((note) => note.text.toLowerCase().includes(searchText))}
+            handleAddNote={addNote}
+            handleDeleteNote={deleteNote}
+          />
+        </div>
+      </div>
+    </ThemeProvider>
+    // </ColorModeContext.Provider>
   );
 };
 
